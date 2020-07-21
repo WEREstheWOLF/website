@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="../css/shapeTFGame.css">
+	<link rel="shortcut icon" href="../Media/paw.jfif">
+	<title>Shape Game</title>
+	<a href="../index.html"><p class="return">Return to Homepage</p></a>
+</head>
+
+<body>
+	<div class="return"><button onclick="displayGame()">Play!</button></div>
+	<p id="gameText"></p><br>
+	<canvas width="900" height="500" id="canvas" onclick="getCoord()">
+		
+	</canvas>
+
+
+	<script>
+		var x1,x2,x3,x4,x5,y1,y2,y3,y4,y5;
+		var j=0;
+		function displayGame(){
+			var x = document.getElementById("canvas");
+			x.style.display = "block";
+			document.getElementById("gameText").innerHTML = "Please click on five locations " +
+				"for shapes to appear.";
+		}
+		async function getCoord(){
+			var can = document.getElementById("canvas");
+			var ctx = can.getContext("2d");
+			var offset = can.getBoundingClientRect();
+			if(!window.x1){
+				window.x1 = event.clientX - offset.left;
+				window.y1 = event.clientY - offset.top;
+			}
+			else if (!window.x2){
+				window.x2 = event.clientX - offset.left;
+				window.y2 = event.clientY - offset.top;
+			}
+			else if (!window.x3){
+				window.x3 = event.clientX - offset.left;
+				window.y3 = event.clientY - offset.top;
+			}
+			else if (!window.x4){
+				window.x4 = event.clientX - offset.left;
+				window.y4 = event.clientY - offset.top;
+			}
+			else if (!window.x5){
+				window.x5 = event.clientX - offset.left;
+				window.y5 = event.clientY - offset.top;
+			}
+			else{
+				event.stopPropagation();
+				alert("Please refresh the page to reset the game.");
+				exit(0);
+			}
+			window.j++;
+			if(window.j<6){
+				document.getElementById("gameText").innerHTML = "Total " + window.j;
+			}
+			else {
+				document.getElementById("gameText").innerHTML = "Total 5";
+			}
+			if(j>4){
+				draw1();
+				await new Promise( r => setTimeout(r, 700));
+				draw2();
+				await new Promise( r => setTimeout(r, 700));
+				draw3();
+				await new Promise( r => setTimeout(r, 700));
+				draw4();
+				await new Promise( r => setTimeout(r, 700));
+				draw5();
+			}
+		}
+		async function draw1(){
+			var randX, randY;
+			randX = Math.floor((Math.random() * 150) + 20);
+			randY = Math.floor((Math.random() * 150) + 20);
+			var can = document.getElementById("canvas");
+			var ctx = can.getContext("2d");
+			ctx.moveTo(window.x1-(randX/2), window.y1-(randY/2));
+			ctx.lineTo(window.x1-(randX/2), window.y1+(randY/2));
+			ctx.lineTo(window.x1+(randX/2), window.y1+(randY/2));
+			ctx.lineTo(window.x1+(randX/2), window.y1-(randY/2));
+			ctx.lineTo(window.x1-(randX/2), window.y1-(randY/2));
+			ctx.strokeStyle = randHex();
+			ctx.lineWidth = 10;
+			ctx.stroke();
+			await new Promise( r => setTimeout(r, 700));
+			ctx.fillStyle = randHex();
+			ctx.fill();
+			await new Promise( r => setTimeout(r, 700));
+		}
+		async function draw2(){
+			var randR;
+			randR = Math.floor((Math.random() * 80) + 20);
+			var can = document.getElementById("canvas");
+			var ctx = can.getContext("2d");
+			ctx.moveTo(window.x2-(randR/2), window.y2);
+			ctx.arc(window.x2-(randR/2), window.y2, randR, 0, 2 * Math.PI);
+			ctx.strokeStyle = randHex();
+			ctx.lineWidth = 10;
+			ctx.stroke();
+			await new Promise( r => setTimeout(r, 700));
+			ctx.fillStyle = randHex();
+			ctx.fill();
+			await new Promise( r => setTimeout(r, 700));
+		}
+		async function draw3(){
+			var randX, randY;
+			randX = Math.floor((Math.random() * 150) + 20);
+			randY = Math.floor((Math.random() * 150) + 20);
+			var can = document.getElementById("canvas");
+			var ctx = can.getContext("2d");
+			ctx.moveTo(window.x3-(randX/2), window.y3+(randY/2));
+			ctx.lineTo(window.x3+(randX/2), window.y3+(randY/2));
+			ctx.lineTo(window.x3, window.y3-(randY/2));
+			ctx.lineTo(window.x3-(randX/2), window.y3+(randY/2));
+			ctx.lineTo(window.x3+(randX/2), window.y3+(randY/2));
+			ctx.strokeStyle = randHex();
+			ctx.lineWidth = 10;
+			ctx.stroke();
+			await new Promise( r => setTimeout(r, 700));
+			ctx.fillStyle = randHex();
+			ctx.fill();
+			await new Promise( r => setTimeout(r, 700));
+		}
+		async function draw4(){
+			var randX, randY;
+			randX = Math.floor((Math.random() * 150) + 20);
+			randY = Math.floor((Math.random() * 150) + 20);
+			var can = document.getElementById("canvas");
+			var ctx = can.getContext("2d");
+			ctx.moveTo(window.x4-(randX/3), window.y4+(randY/2));
+			ctx.lineTo(window.x4, window.y4-(randY/2));
+			ctx.lineTo(window.x4+(randX/3), window.y4+(randY/2));
+			ctx.lineTo(window.x4-(randX/2), window.y4-(randY/5));
+			ctx.lineTo(window.x4+(randX/2), window.y4-(randY/5));
+			ctx.lineTo(window.x4-(randX/3), window.y4+(randY/2));
+			ctx.lineTo(window.x4, window.y4-(randY/2));
+			ctx.strokeStyle = randHex();
+			ctx.lineWidth = 10;
+			ctx.stroke();
+			await new Promise( r => setTimeout(r, 700));
+			ctx.fillStyle = randHex();
+			ctx.fill();
+			await new Promise( r => setTimeout(r, 700));
+		}
+		async function draw5(){
+			var randX, randY;
+			randX = Math.floor((Math.random() * 150) + 20);
+			randY = Math.floor((Math.random() * 150) + 20);
+			var can = document.getElementById("canvas");
+			var ctx = can.getContext("2d");
+			ctx.moveTo(window.x5+(randX/2), window.y5-(randY/2));
+			ctx.lineTo(window.x5-(randX/2), window.y5-(randY/2));
+			ctx.lineTo(window.x5, window.y5+(randY/2));
+			ctx.lineTo(window.x5+(randX/2), window.y5-(randY/2));
+			ctx.lineTo(window.x5-(randX/2), window.y5-(randY/2));
+			ctx.strokeStyle = randHex();
+			ctx.lineWidth = 10;
+			ctx.stroke();
+			await new Promise( r => setTimeout(r, 700));
+			ctx.fillStyle = randHex();
+			ctx.fill();
+			await new Promise( r => setTimeout(r, 700));
+		}
+		function randHex(){
+			var pick = '0123456789ABFCEF';
+			var color = '#';
+			for(var i=0;i<6;i++){
+				color += pick[Math.floor(Math.random() * 16)];
+			}
+			return color;
+		}
+	</script>
+</body>
+</html>
