@@ -1,0 +1,26 @@
+body{
+	background-image:url("../Media/SIUCC.jpeg");
+	background-position:center;
+	background-size:cover;
+	height:1200px;
+}
+
+table{
+	background-color:#c0c0c0;
+}
+
+a{
+	background-color:#c0c0c0;
+}
+
+h1{
+	color:red;
+}
+
+#text{
+	color:red;
+}
+
+#secret{
+	color:gold;
+}

@@ -1,0 +1,19 @@
+html{
+	background:#c0c0c0;
+	position:center;
+}
+
+.return, #gameText{
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#canvas{
+	display: none;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	text-align: center;
+	border:1px solid #000000;
+}

@@ -1,0 +1,97 @@
+html{
+	background:#c0c0c0;
+	position:center;
+}
+
+#container{
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	text-align:center;
+	clear:both;
+}
+
+#fig{
+	text-align: center;
+	background:#305400;
+}
+
+.pic{
+	float: center;
+	cursor:pointer;
+}
+
+#container:hover div.secretText{
+	text-align: right;
+	position:fixed;
+	display: block;
+}
+
+.secretText{
+	position: fixed;
+	text-align: right;
+	display:none;
+	color:gold;
+}
+
+h1{
+	text-align:center;
+}
+
+h1,h2{
+	color:blue;
+}
+
+#bio{
+	color:white;
+}
+
+pre{
+	text-align: center;
+	color:#a35f00;
+}
+
+#fb{
+	color:#4267b2;
+}
+
+#twitter{
+	color:#00acee;
+}
+
+#link{
+	color:red;
+}
+
+nav, aside{
+	text-align: center;
+}
+
+.table{
+	display: inline-block;
+	border-spacing:5px;
+}
+
+.row{
+	display:table-row;
+}
+
+.row > *{
+	display:table-cell;
+	text-align:center;
+}
+
+input:invalid:required{
+	border: 2px solid red;
+}
+
+footer{
+	text-align: center;
+}
+
+.game{
+	color: #4c0a78;
+	text-align:center;
+}
+
