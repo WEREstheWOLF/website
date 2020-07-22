@@ -7,6 +7,9 @@ var url = require('url');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
+var ffv = require('.node_modules/feedbackformval'); //custom?
+var nodemailer = require('nodemailer');
+var uuidvl = require('uuid/vl');
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
@@ -19,7 +22,57 @@ app.use(express.static('public/css'));
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/contactMe', function(req, res){
+app.post('/html/form_submission.php', funstion (req, res){
+	var body = '';
+	var testValidity = false;
+	req.on('data', function(chunk){
+		body += chunk.toString();
+	});
+	req.on('end', function(){
+		testValidity = ffv.validateForm(body); //check
+		if(testValidity === true){
+			var ts = Date.now();
+			var parsed = qs.parse(body);
+			fs.appendFile('flatfileDB.txt', convertToString(parsed, ts)); //check
+			sendEmail(parsed['email'],ts);
+			res.writeHead(301, {'Content-Type': 'text/plain', Location: '/'} );
+			res.end();
+		}
+		else{
+			res.writeHead(301, {'Content-Type': 'text/plain', Location: '/'} );
+			res.end(testValidity);
+		}
+	});
+});
+
+function convertToString(data, ts){
+	data.id = uuidvl();
+	data.created_at = Date();
+	data.reference_id = ts;
+	return JSON.stringify(data);
+}
+
+function sendEmail(email, reference){
+	var transporter = nodemailer.createTransport({
+		service: 'gmail',
+		host: 'smtp.gmail.com',
+		auth: {
+			user: process.env.EMAILUSER,
+			pass: process.env.EMAILPASS
+		}
+	});
+	var mailOptions = {
+		from: process.env.EMAILUSER,
+		to: email,
+		subject: 'Confirmation Email',
+		text: "Your information has been received.\nThank you for your feedback."
+	};
+	transporter.sendMail(mailOptions);
+}
+			
+	
+
+/*app.get('/contactMe', function(req, res){
 	return response.render('contactMe', {qs: req.query}));
 });
 
@@ -27,9 +80,9 @@ app.post('/contactMe', urlencodedParser, function(request, response){
 	return response.render('contactMe', {qs: req.query}));
 });
 
-app.get('/contactMe', function(req, res
+app.get('/contactMe', function(req, res){
 	return response.send(request.body);
-});
+});*/
 
 
 
