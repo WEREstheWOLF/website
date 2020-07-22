@@ -13,8 +13,12 @@ var app = express();
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', function(request, response){
+app.get('/html/contactMe.html', function(request, response){
 	return response.render('contactMe');
+});
+
+app.get('/misc/form_submission.php', function(request, response){
+	return response.send(request.query);
 });
 
 htapptp.get('/contactMe', function(request, response){
