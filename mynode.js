@@ -45,6 +45,39 @@ app.post('/html/form_submission.php', funstion (req, res){
 	});
 });
 
+app.get('*', function(req, res){
+	if(req.url === '/favicon.ico'){
+		res.writeHead(200, {Content-Type': 'image/x-icon} );
+		return res.end();
+	}
+	var pathname = url.parse(req.url).pathname;
+	pathname = ( pathname === '/' || pathname === '' ) ? '/index.htm' : pathname;
+	var ext = path.extname(pathname);
+	fs.readFile(__dirname + pathname, function(err, data){
+		if(err){
+			if(ext){
+				res.writeHead(404, {'Content-Type': mimeTypes[ext]});
+			}
+			else{
+				res.writeHead(404, {'Content-Type': 'text/html'});
+			}
+			return res.end("404 Not Found");
+		}
+		if(ext){
+			res.writeHead(200, {'Content-Type': mimeTypes[ext]});
+		}
+		else{
+			res.writeHead(200, {'Content-Type': 'text/html'});
+		}
+		res.write(data);
+		return.end();
+	});
+});
+
+			
+			
+			
+
 function convertToString(data, ts){
 	data.id = uuidvl();
 	data.created_at = Date();
