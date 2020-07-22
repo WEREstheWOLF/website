@@ -5,7 +5,10 @@ var htmlFile;
 var path = require('path');
 var url = require('url');
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
+
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 //app.use('/css',express.styatic(__dirname + '/css'));
 //app.use('/public',express.static('public'));
@@ -13,11 +16,15 @@ var app = express();
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/contactMe', function(request, response){
-	return response.render('contactMe');
+app.get('/contactMe', function(req, res){
+	return response.render('contactMe', {qs: req.query}));
 });
 
-app.get('/contactMe', function(request, response){
+app.post('/contactMe', urlencodedParser, function(request, response){
+	return response.render('contactMe', {qs: req.query}));
+});
+
+app.get('/contactMe', function(req, res
 	return response.send(request.body);
 });
 
