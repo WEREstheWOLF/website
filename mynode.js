@@ -10,6 +10,17 @@ var app = express();
 //app.use('/css',express.styatic(__dirname + '/css'));
 //app.use('/public',express.static('public'));
 
+app.set('view engine', 'pug');
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get('/', function(request, response){
+	return response.render('contactMe');
+});
+
+htapptp.get('/contactMe', function(request, response){
+	return response.render('contactMe');
+});
+
 http.createServer(function (req, res){
 	var q = url.parse(req.url, true);
 	var filename = "." + q.pathname;
