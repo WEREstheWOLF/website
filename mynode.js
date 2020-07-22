@@ -90,8 +90,8 @@ function sendEmail(email, reference){
 		service: 'gmail',
 		host: 'smtp.gmail.com',
 		auth: {
-			user: process.env.noreplytyler38,
-			pass: process.env.abcdefghijkLMNOP123
+			user: noreplytyler38@gmail.com,
+			pass: abcdefghijkLMNOP123
 		}
 	});
 	var mailOptions = {
