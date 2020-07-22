@@ -13,17 +13,15 @@ var app = express();
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/html/contactMe.html', function(request, response){
+app.get('/contactMe', function(request, response){
 	return response.render('contactMe');
 });
 
-app.get('/misc/form_submission.php', function(request, response){
-	return response.send(request.query);
+app.get('/contactMe', function(request, response){
+	return response.send(request.body);
 });
 
-htapptp.get('/contactMe', function(request, response){
-	return response.render('contactMe');
-});
+
 
 http.createServer(function (req, res){
 	var q = url.parse(req.url, true);
