@@ -89,13 +89,13 @@ function sendEmail(email, reference){
 	var transporter = nodemailer.createTransport({
 		service: 'gmail',
 		host: 'smtp.gmail.com',
-		/*auth: {
-			user: process.env.EMAILUSER,
-			pass: process.env.EMAILPASS
-		}*/
+		auth: {
+			user: process.env.noreplytyler38,
+			pass: process.env.abcdefghijkLMNOP123
+		}
 	});
 	var mailOptions = {
-		//from: process.env.EMAILUSER,
+		from: process.env.EMAILUSER,
 		to: email,
 		subject: 'Confirmation Email',
 		text: "Your information has been received.\nThank you for your feedback."
