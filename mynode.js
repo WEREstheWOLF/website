@@ -10,6 +10,9 @@ var app = express();
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
+app.use(express.static('public'));
+app.use(express.static('public/css'));
+
 //app.use('/css',express.styatic(__dirname + '/css'));
 //app.use('/public',express.static('public'));
 
