@@ -25,30 +25,18 @@
 	
 	<script>
 		function thankYou(){
-			alert("Thank you for your submision.")
-			const name = document.getElementById('name');
-			const address = document.getElementById('address');
-			const phone = document.getElementById('phone');
-			const email = document.getElementById('email');
-			const comments = document.getElementById('comments');
-			let data = 
-			    '\r Name: ' + name.value + ' \r\n ' +
-			    'Address: ' + address.value + ' \r\n ' +
-			    'Phone: ' + phone.value + ' \r\n ' +
-			    'Email: ' + email.value + ' \r\n ' +
-			    'Comments: ' + comments.value;
-			const textToBLOB = new Blob([data], {type: 'text/plain' });
-			const sFileName = 'form_submission.php';
-			let newLink = document.createElement("a");
-			newLink.download = sFileName;
-			if(window.webkitURL != null){
-				newLink.href = window.webkitURL.createObjectURL(textToBLOB);
-			}
-			else{
-				newLink.href = window.URL.createObjectURL(textToBLOB);
-				newLink.style.display = "none";
-				document.body.appendChild(newLink);
-			}
+			event.preventDefault();
+			var form = document.getElementById("form");
+			var name, address, phone, email, comments;
+			var collection = new Array();
+			var test = "";
+			
+			name = form.elements["name"].value;
+			
+			text = "Thank you for your submission, " + name + ".";
+			text += "\n\nYour information is being processed.\nA confirmation email should be sent to you shortly."
+			alert(text)
+			form.submit();
 		}
 	</script>
 </body>
