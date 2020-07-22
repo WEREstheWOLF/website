@@ -16,13 +16,10 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.use(express.static('public'));
 app.use(express.static('public/css'));
 
-//app.use('/css',express.styatic(__dirname + '/css'));
-//app.use('/public',express.static('public'));
-
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/html/form_submission.php', funstion (req, res){
+app.post('/form_submission.php', function (req, res){
 	var body = '';
 	var testValidity = false;
 	req.on('data', function(chunk){
@@ -51,7 +48,7 @@ app.get('*', function(req, res){
 		return res.end();
 	}
 	var pathname = url.parse(req.url).pathname;
-	pathname = ( pathname === '/' || pathname === '' ) ? '/index.htm' : pathname;
+	pathname = ( pathname === '/' || pathname === '' ) ? '/contactMe.htm' : pathname;
 	var ext = path.extname(pathname);
 	fs.readFile(__dirname + pathname, function(err, data){
 		if(err){
@@ -73,10 +70,6 @@ app.get('*', function(req, res){
 		return.end();
 	});
 });
-
-			
-			
-			
 
 function convertToString(data, ts){
 	data.id = uuidvl();
