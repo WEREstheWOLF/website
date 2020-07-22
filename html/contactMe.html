@@ -14,11 +14,11 @@
 	<p>Please send me your contact information with any questions/comments/concerns you may have.</p>
 	<form onsubmit="thankYou()" method="post" action="form_submission.php">
 		<table>
-		<tr><td>Name: </td><td><input type="text" size="30" required="true"></td></tr>
-		<tr><td>Address: </td><td><input type="text" size="35"></td></tr>
-		<tr><td>Phone: </td><td><input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="123-456-7890" max="10" required="true"></td></tr>
-		<tr><td>Email: </td><td><input type="email" size="30" required="true"></td></tr>
-		<tr><td>Comments: </td><td><textArea type="textArea"></textArea></td></tr>
+		<tr><td>Name: </td><td><input type="text" id="name" size="30" required="true"></td></tr>
+		<tr><td>Address: </td><td><input type="text" id="address" size="35"></td></tr>
+		<tr><td>Phone: </td><td><input type="tel" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="123-456-7890" max="10" required="true"></td></tr>
+		<tr><td>Email: </td><td><input type="email" id="email" size="30" required="true"></td></tr>
+		<tr><td>Comments: </td><td><textArea type="textArea" id="comments"></textArea></td></tr>
 		<tr><td colspan="2"><input type="submit" value="Submit"></td></tr>
 		<table>
 	</form>
@@ -26,6 +26,32 @@
 	<script>
 		function thankYou(){
 			alert("Thank you for your submision.")
+			const name = document.getElementById('name');
+			const address = document.getElementById('address');
+			const phone = document.getElementById('phone');
+			const email = document.getElementById('email');
+			const comments = document.getElementById('comments');
+			let data = 
+			    '\r Name: ' + name.value + ' \r\n ' +
+			    'Address: ' + address.value + ' \r\n ' +
+			    'Phone: ' + phone.value + ' \r\n ' +
+			    'Email: ' + email.value + ' \r\n ' +
+			    'Comments: ' + comments.value;
+			const textToBLOB = new Blob([data], {type: 'text/plain' });
+			const sFileName = 'form_submission.php';
+			let newLink = document.createElement("a");
+			newLink.download = sFileName;
+			if(window.webkitURL != null){
+				newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+			}
+			else{
+				newLink.href = window.URL.createObjectURL(textToBLOB);
+				newLink.style.display = "none";
+				document.body.appendChild(newLink);
+			}
+			newLink.click();
+			
+			
 			window.location.href = "./index.html";
 			
 		}
