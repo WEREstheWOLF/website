@@ -1,5 +1,5 @@
 if((isset( $_POST['submit'])){
-  echo '<h2>form date retreived using $_REQUEST variable test<h2/>
+  echo '<h2>form date retreived using $_REQUEST variable test<h2/>'
   $name = $_REQUEST['name'];
   echo 'Your name is ' . $name;
 }
