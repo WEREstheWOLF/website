@@ -1,8 +1,8 @@
 <?php
-$_POST['name'];
+//$_POST['name'];
 $name=$_POST['name'];
 echo 'Your name is ' . $name;
-//if(isset($_POST['form'])){
+//if(isset($_POST['Form'])){
   $name=%_POST['name'];
   $fp = fopen('data.txt', 'a');
   fwrite($fp, $data);
