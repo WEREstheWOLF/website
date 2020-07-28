@@ -1,5 +1,8 @@
 <?php
 $_POST['name'];
+  $name = $_POST['name'];
+  echo 'Your name is ' . $name;
+
 /*if((isset( $_POST['submit'])){
   echo '<h2>form data retreived using $_REQUEST variable test</h2>'
   $name = $_REQUEST['name'];
