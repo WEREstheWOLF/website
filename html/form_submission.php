@@ -1,5 +1,5 @@
 <?php
-//$_POST['name'];
+$_POST['name'];
 $name=$_POST['name'];
 echo 'Your name is ' . $name;
 //if(isset($_POST['Form'])){
@@ -8,7 +8,7 @@ echo 'Your name is ' . $name;
   fwrite($fp, $data);
   fclose($fp);
 //}
-?>
+
 
 
 /*if((isset( $_POST['submit'])){
@@ -26,3 +26,4 @@ if( filter_has_var(INPUT_GET, 'submit' )){
   $name = $_GET['name'];
   echo 'Your name is ' . $name;
 }*/
+?>
