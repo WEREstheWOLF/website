@@ -1,3 +1,4 @@
+<?php
 if((isset( $_POST['submit'])){
   echo '<h2>form data retreived using $_REQUEST variable test</h2>'
   $name = $_REQUEST['name'];
@@ -13,3 +14,4 @@ if( filter_has_var(INPUT_GET, 'submit' )){
   $name = $_GET['name'];
   echo 'Your name is ' . $name;
 }
+?>
