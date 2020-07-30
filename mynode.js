@@ -15,11 +15,41 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.use(express.static('public'));
 app.use(express.static('public/css'));
+app.use(express.urlencoded());
+app.use(expresds.static(__dirname));
 
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/form_submission.php', function (req, res){
+app.post('/html/contactMe.html', (req, res) => { 			//CHECK PATH
+	console.log('Data: ', req.body.name, req.body.email);
+	var transporter = nodemailer.createTransport({
+		service: 'gmail',
+		auth: {
+			user: 'noreplytyler38@gmail.com',
+			pass: 'abcdefghijkLMNOP123'
+		}
+	});
+	
+	const mailOptions = {
+		from: 'noreplytyler38@gmail.com',
+		to: req.body.email,
+		subject: '[EB]Submission Confirmation',
+		html: '<p>Dear ' + req.body.name + ' ' + ',</p><p>Thank you for your feedback submission.</p><p>Sincerely,</p><p>EB</p>
+	};
+	
+	transporter.sendMail(mailOptions, function (err, info){
+		iff(err){
+			console.log(err);
+		}
+		else{
+			console.log(info);
+		}
+	});
+	res.redirect('back');
+});
+
+/*app.post('/form_submission.php', function (req, res){
 	var body = '';
 	var testValidity = false;
 	req.on('data', function(chunk){
@@ -30,7 +60,7 @@ app.post('/form_submission.php', function (req, res){
 		if(testValidity === true){
 			var ts = Date.now();
 			var parsed = qs.parse(body);
-			fs.appendFile('flatfileDB.txt', convertToString(parsed, ts)); //check
+			fs.appendFile('data.txt', convertToString(parsed, ts)); 			//check
 			sendEmail(parsed['email'],ts);
 			res.writeHead(301, {'Content-Type': 'text/plain', Location: '/'} );
 			res.end();
@@ -40,7 +70,7 @@ app.post('/form_submission.php', function (req, res){
 			res.end(testValidity);
 		}
 	});
-});
+});		*/
 
 app.get('*', function(req, res){
 	if(req.url === '/favicon.ico'){
