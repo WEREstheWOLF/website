@@ -16,10 +16,14 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.use(express.static('public'));
 app.use(express.static('public/css'));
 app.use(express.urlencoded());
-app.use(expresds.static(__dirname));
+app.use(express.static(__dirname));
 
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get('/contact', function(req, res){
+	res.render('contact', {qs: req.query});
+});
 
 app.post('/html/contactMe.html', (req, res) => { 			//CHECK PATH
 	console.log('Data: ', req.body.name, req.body.email);
