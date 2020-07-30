@@ -1,0 +1,84 @@
+<!--CS350 Tyler Knupp Project 02 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="../public/css/index.css">
+	<link rel="shortcut icon" href="../Media/paw.jfif">
+	<title>Contact Me</title>
+</head>
+
+<body>
+	<h2>Contact Me</h2>
+	<p>Please send me your contact information with any questions/comments/concerns you may have.</p>
+	<form onsubmit="thankYou(event)" method="post" action="/submit-contactMe" id="form" name="Form">
+		<table>
+		<tr><td>Name: </td><td><input type="text" id="name" size="30" required="true"></td></tr>
+		<tr><td>Address: </td><td><input type="text" id="address" size="35"></td></tr>
+		<tr><td>Phone: </td><td><input type="tel" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="123-456-7890" max="10" required="true"></td></tr>
+		<tr><td>Email: </td><td><input type="email" id="email" size="30" required="true"></td></tr>
+		<tr><td>Comments: </td><td><textArea type="textArea" id="comments"></textArea></td></tr>
+		<tr><td colspan="2"><input type="submit" value="Submit"></td></tr>
+		<table>
+	</form>
+	
+	<script>
+		function thankYou(){
+			//alert("Thank you for your submision.")
+			event.preventDefault();
+			var form = document.getElementById("form");
+			var title, name, address, phone, email, comments;
+			var collection = new Array();
+			var text = "";
+			if(collection.length > 0){
+				for(var element of collection){
+					text += element + "\n";
+				}
+				alert(text);
+				return false;
+			}
+			//title = form.elements["title-name"].value;
+			name = form.elements["name"].value;
+			text = "Thank you or your submission, " + name + ".";
+			text += "\n\nYour information is being processed.\nA confirmation email should be sent to you shortly."
+			alert(text);
+			form.submit();
+			
+			
+			
+			
+			
+			/*const name = document.getElementById('name');
+			const address = document.getElementById('address');
+			const phone = document.getElementById('phone');
+			const email = document.getElementById('email');
+			const comments = document.getElementById('comments');
+			let data = 
+			    '\r Name: ' + name.value + ' \r\n ' +
+			    'Address: ' + address.value + ' \r\n ' +
+			    'Phone: ' + phone.value + ' \r\n ' +
+			    'Email: ' + email.value + ' \r\n ' +
+			    'Comments: ' + comments.value;
+			const textToBLOB = new Blob([data], {type: 'text/plain' });
+			const sFileName = 'form_submission.php';
+			let newLink = document.createElement("a");
+			newLink.download = sFileName;
+			if(window.webkitURL != null){
+				newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+			}
+			else{
+				newLink.href = window.URL.createObjectURL(textToBLOB);
+				newLink.style.display = "none";
+				document.body.appendChild(newLink);
+			}*/
+		}
+	</script>
+</body>
+
+<footer>
+	<hr>
+	<p><a href="../index.html">Return to Homepage</a></p>
+</footer>
+
+</html>
