@@ -21,7 +21,11 @@ app.use(express.static(__dirname));
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/contact', function(req, res){
+app.get('/contactMe', function(req, res){
+	res.render('contact', {qs: req.query});
+});
+
+app.post('/contactMe', urlencodedParser, function(req, res){
 	res.render('contact', {qs: req.query});
 });
 
