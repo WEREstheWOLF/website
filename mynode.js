@@ -22,7 +22,7 @@ app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/contactMe', function(req, res){
-	res.render('contact', {qs: req.query});
+	res.render('contactMe', {qs: req.query});
 });
 
 app.post('/contactMe', urlencodedParser, function(req, res){
