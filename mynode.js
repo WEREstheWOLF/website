@@ -93,7 +93,7 @@ app.get('*', function(req, res){
 		return res.end();
 	}
 	var pathname = url.parse(req.url).pathname;
-	pathname = ( pathname === '/' || pathname === '' ) ? '/contactMe.htm' : pathname;
+	pathname = ( pathname === '/' || pathname === '' ) ? '/contactMe.html' : pathname;
 	var ext = path.extname(pathname);
 	fs.readFile(__dirname + pathname, function(err, data){
 		if(err){
