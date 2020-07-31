@@ -1,5 +1,6 @@
 var http = require('http');
 
+var tj = require('templatesjs');
 var fs = require('fs');
 var htmlFile;
 var path = require('path');
@@ -7,11 +8,12 @@ var url = require('url');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
-var ffv = require('.node_modules/feedbackformval'); //custom?
+//var ffv = require('.node_modules/feedbackformval'); //custom?
 var nodemailer = require('nodemailer');
 var uuidvl = require('uuid/vl');
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
 
 app.use(express.static('public'));
 app.use(express.static('public/css'));
@@ -19,7 +21,20 @@ app.use(express.urlencoded());
 app.use(express.static(__dirname));
 
 app.set('view engine', 'html');
+
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGODB_URI);
+var feedbackSchema = new mongoose.Schema({
+	name: String,
+	address: String,
+	phone: String,
+	email: String,
+	comments: String
+});
+var feedback = mongoose.model("feedback", feedbackSchema);
 
 app.get('/html/contactMe', function(req, res){
 	res.render('contactMe', {qs: req.query});
@@ -28,12 +43,48 @@ app.get('/html/contactMe', function(req, res){
 	return res.render('contactMe');
 });
 
-app.get('/submit-contactMe', function(req, res){
-	return response.send(req.query);
-});
+app.post('/post-feedback', function(req, res) =>{
+	async function queryMongo(){
+		const userStatus = await feedback.findOneAndUpdate( {email: req.body.email}, {$set:{
+			name: req.body.name,
+			address: req.body.address,
+			phone: req.body.phone,
+			email: req.body.email,
+			comments: req.body.comments
+		}}, {upsert: true});
+		return userStatus;
+	}
 
-app.post('/submit-contactMe', function(req, res){
-	return response.send(req.query);
+	queryMongo().then(result => {
+		let userStatus = result;
+		let feedbackPage = fs.readFileSync(__dirname + 'html/contactMe.html');
+		
+		if (userStatus !== null) {
+			tj.setSync(feedbackPage);
+			let lineOne = "Thank you for revisiting, " + req.body.name + ">";
+			let lineTwo = "Your new feedback has been recorded.";
+			
+			var output = tj.renderSync("primarymessage",lineOne);
+			output = tj.setSync("secondarymessage",lineTwo);
+			
+			res.writeHead(200,{"Content-Type" : "text/html"});
+			res.write(output);
+			res.end();
+		}
+		else{
+			tj.setSync(feedbackPage);
+			let lineOne = "I apprecxiate your feedback, " + req.body.name + ".";
+			var output = tj.renderSync("primarymessage",lineOne);
+			feedback.count({}, function( err, count){
+				console.log(count);
+				lineTwo = "You are visitor number: <b>" + (count) + "</b>.";
+				output = tj.renderSync("secondarymessage",lineTwo);
+				res.writeHead(200,{"Content-Type" : "text/html"});
+				res.write(output);
+				res.end();
+			});
+		}
+	});
 });
 
 app.post('/html/contactMe', urlencodedParser, function(req, res){
