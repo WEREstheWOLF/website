@@ -12,7 +12,7 @@
 <body>
 	<h2>Contact Me</h2>
 	<p>Please send me your contact information with any questions/comments/concerns you may have.</p>
-	<form onsubmit="thankYou(event)" method="POST" action="/post-feedback" id="form" name="Form">
+	<form /*onsubmit="thankYou(event)"*/ method="POST" action="/post-feedback" id="form" name="Form">
 		<table>
 		<tr><td>Name: </td><td><input type="text" id="name" size="30" name="name" required="true"></td></tr>
 		<tr><td>Address: </td><td><input type="text" id="address" size="35" name="address"></td></tr>
@@ -24,7 +24,7 @@
 	</form>
 	
 	<script>
-		function thankYou(){
+		/*function thankYou(){
 			//alert("Thank you for your submision.")
 			event.preventDefault();
 			var form = document.getElementById("form");
@@ -45,34 +45,7 @@
 			alert(text);
 			form.submit();
 			
-			
-			
-			
-			
-			/*const name = document.getElementById('name');
-			const address = document.getElementById('address');
-			const phone = document.getElementById('phone');
-			const email = document.getElementById('email');
-			const comments = document.getElementById('comments');
-			let data = 
-			    '\r Name: ' + name.value + ' \r\n ' +
-			    'Address: ' + address.value + ' \r\n ' +
-			    'Phone: ' + phone.value + ' \r\n ' +
-			    'Email: ' + email.value + ' \r\n ' +
-			    'Comments: ' + comments.value;
-			const textToBLOB = new Blob([data], {type: 'text/plain' });
-			const sFileName = 'form_submission.php';
-			let newLink = document.createElement("a");
-			newLink.download = sFileName;
-			if(window.webkitURL != null){
-				newLink.href = window.webkitURL.createObjectURL(textToBLOB);
-			}
-			else{
-				newLink.href = window.URL.createObjectURL(textToBLOB);
-				newLink.style.display = "none";
-				document.body.appendChild(newLink);
-			}*/
-		}
+		}*/
 	</script>
 </body>
 
