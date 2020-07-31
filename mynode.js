@@ -207,6 +207,10 @@ http.createServer(function (req, res){
     res.sendFile(path.join(__dirname+'/index.html'));
 });
 		
+const listener = app.listen(process.env.PORT, () => {
+	console.log("Website is running on port " + listener.address().port);
+});
+		
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname+'/contactMe.html'));
 });
