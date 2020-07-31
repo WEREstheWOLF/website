@@ -1,6 +1,6 @@
 {
 "name": "CS-350-Project04",
-"main": mynode.js",
+"main": "mynode.js",
 
 "scripts": {
   "start": "node server.js"
