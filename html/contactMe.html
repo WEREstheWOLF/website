@@ -12,13 +12,13 @@
 <body>
 	<h2>Contact Me</h2>
 	<p>Please send me your contact information with any questions/comments/concerns you may have.</p>
-	<form onsubmit="thankYou(event)" method="post" action="form_submission.php" id="form" name="Form">
+	<form onsubmit="thankYou(event)" method="POST" action="/post-feedback" id="form" name="Form">
 		<table>
-		<tr><td>Name: </td><td><input type="text" id="name" size="30" required="true"></td></tr>
-		<tr><td>Address: </td><td><input type="text" id="address" size="35"></td></tr>
-		<tr><td>Phone: </td><td><input type="tel" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="123-456-7890" max="10" required="true"></td></tr>
-		<tr><td>Email: </td><td><input type="email" id="email" size="30" required="true"></td></tr>
-		<tr><td>Comments: </td><td><textArea type="textArea" id="comments"></textArea></td></tr>
+		<tr><td>Name: </td><td><input type="text" id="name" size="30" name="name" required="true"></td></tr>
+		<tr><td>Address: </td><td><input type="text" id="address" size="35" name="address"></td></tr>
+		<tr><td>Phone: </td><td><input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="123-456-7890" max="10" required="true"></td></tr>
+		<tr><td>Email: </td><td><input type="email" id="email" size="30" name="email" required="true"></td></tr>
+		<tr><td>Comments: </td><td><textArea type="textArea" id="comments" name="comments"></textArea></td></tr>
 		<tr><td colspan="2"><input type="submit" value="Submit"></td></tr>
 		<table>
 	</form>
