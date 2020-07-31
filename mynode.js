@@ -18,7 +18,8 @@ app.use(express.static(__dirname));
 app.set('view engine', 'html');
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded());
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.heroku_nwkpq781);
