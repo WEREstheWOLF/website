@@ -1,23 +1,19 @@
 var http = require('http');
 
+const express = require("express");
+const app = express();
+var bodyParser = require("body-parser");
+var mongoose = require("mongoose");
 var tj = require('templatesjs');
 var fs = require('fs');
-var htmlFile;
-var path = require('path');
-var url = require('url');
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
-//var ffv = require('.node_modules/feedbackformval'); //custom?
-var nodemailer = require('nodemailer');
-var uuidvl = require('uuid/vl');
+
+
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 
 app.use(express.static('public'));
 app.use(express.static('public/css'));
-app.use(express.urlencoded());
 app.use(express.static(__dirname));
 
 app.set('view engine', 'html');
@@ -26,7 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.mongodb://<dbuser>:<dbpassword>@ds029595.mlab.com:29595/heroku_nwkpq781);
+mongoose.connect(process.env.heroku_nwkpq781);
 var feedbackSchema = new mongoose.Schema({
 	name: String,
 	address: String,
@@ -35,13 +31,6 @@ var feedbackSchema = new mongoose.Schema({
 	comments: String
 });
 var feedback = mongoose.model("feedback", feedbackSchema);
-
-app.get('/html/contactMe', function(req, res){
-	res.render('contactMe', {qs: req.query});
-});
-app.get('/html/contactMe', function(req, res){
-	return res.render('contactMe');
-});
 
 app.post('/post-feedback', function(req, res) =>{
 	async function queryMongo(){
