@@ -76,7 +76,7 @@ app.post('/post-feedback', function(req, res) =>{
 	});
 });
 
-app.post('/html/contactMe', urlencodedParser, function(req, res){
+/*app.post('/html/contactMe', urlencodedParser, function(req, res){
 	res.render('contact', {qs: req.query});
 });
 
@@ -106,7 +106,7 @@ app.post('/html/contactMe.html', (req, res) => { 			//CHECK PATH
 		}
 	});
 	res.redirect('back');
-});
+});*/
 
 /*app.post('/form_submission.php', function (req, res){
 	var body = '';
@@ -184,22 +184,6 @@ function sendEmail(email, reference){
 	};
 	transporter.sendMail(mailOptions);
 }
-			
-	
-
-/*app.get('/contactMe', function(req, res){
-	return response.render('contactMe', {qs: req.query}));
-});
-
-app.post('/contactMe', urlencodedParser, function(request, response){
-	return response.render('contactMe', {qs: req.query}));
-});
-
-app.get('/contactMe', function(req, res){
-	return response.send(request.body);
-});*/
-
-
 
 http.createServer(function (req, res){
 	var q = url.parse(req.url, true);
