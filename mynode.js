@@ -6,11 +6,10 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var tj = require('templatesjs');
 var fs = require('fs');
-
-
+var nodemailer = require('nodemailer');
+const path = require('path')
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-
 
 app.use(express.static('public'));
 app.use(express.static('public/css'));
@@ -203,3 +202,33 @@ http.createServer(function (req, res){
 		return res.end();
 	});
 }).listen(8080);
+		
+		app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname+'/index.html'));
+});
+		
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname+'/contactMe.html'));
+});
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname+'/aboutMe.html'));
+});
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname+'/shapeTFGame.html'));
+});
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname+'/index.css'));
+});
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname+'/aboutMe.css'));
+});
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname+'/shapeTFGame.css'));
+});
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname+'/mynode.js'));
+});
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname+'/index.html'));
+});
