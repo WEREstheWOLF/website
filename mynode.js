@@ -9,7 +9,7 @@ var fs = require('fs');
 var nodemailer = require('nodemailer');
 const path = require('path')
 
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var urlencodedParser = bodyParser.urlencoded({ extended: true });
 
 app.use(express.static('public'));
 app.use(express.static('public/css'));
