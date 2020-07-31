@@ -73,23 +73,20 @@ app.post("/post-feedback", (req, res) =>{
 			});
 		}
 	});
-});
-
-/*app.post('/html/contactMe', urlencodedParser, function(req, res){
-	res.render('contact', {qs: req.query});
-});
-
-app.post('/html/contactMe.html', (req, res) => { 			//CHECK PATH
-	console.log('Data: ', req.body.name, req.body.email);
-	var transporter = nodemailer.createTransport({
-		service: 'gmail',
+	
+	let testAccount = await nodemailer.createTestAccount();
+	
+	let transporter = nodemailer.createTransport({
+		host: "smtp.ethereal.email",
+		port: 587,
+		secure: false,
 		auth: {
-			user: 'noreplytyler38@gmail.com',
-			pass: 'abcdefghijkLMNOP123'
+			user: testAccount.user,
+			pass: testAccount.pass,
 		}
 	});
 	
-	const mailOptions = {
+	let info = await transporter.sendMail({
 		from: 'noreplytyler38@gmail.com',
 		to: req.body.email,
 		subject: '[EB]Submission Confirmation',
@@ -105,7 +102,7 @@ app.post('/html/contactMe.html', (req, res) => { 			//CHECK PATH
 		}
 	});
 	res.redirect('back');
-});*/
+});
 
 /*app.post('/form_submission.php', function (req, res){
 	var body = '';
