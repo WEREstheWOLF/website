@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.mongodb://<dbuser>:<dbpassword>@ds029595.mlab.com:29595/heroku_nwkpq781);
 var feedbackSchema = new mongoose.Schema({
 	name: String,
 	address: String,
