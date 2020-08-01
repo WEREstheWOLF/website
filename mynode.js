@@ -33,7 +33,7 @@ var feedbackSchema = new mongoose.Schema({
 var feedback = mongoose.model("feedback", feedbackSchema);
 
 app.post("/post-feedback", (req, res) =>{
-	async function queryMongo(){
+	function queryMongo(){
 		const userStatus = await feedback.findOneAndUpdate( {email: req.body.email}, {$set:{
 			name: req.body.name,
 			address: req.body.address,
