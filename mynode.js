@@ -49,15 +49,14 @@ app.post('/', function(request, response) {
   output += lineFive;
   
   //start email
-  let transporter = nodemailer.createTransport({
-		host: "smtp.ethereal.email",
-		port: 587,
-		secure: false,
-		auth: {
-			user: 'testAccount.user',
-			pass: 'testAccount.pass',
-		}
-	});
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.ethereal.email',
+    port: 587,
+    auth: {
+        user: 'jackson.nicolas41@ethereal.email',
+        pass: 'YNXYwZVHZ6wBD24vaU'
+    }
+  });
   let info = transporter.sendMail({
 		from: 'noreplytyler38@gmail.com',
 		to: request.body.email,
@@ -86,6 +85,7 @@ app.post('/', function(request, response) {
 port = 3000
 app.listen(port)
 console.log(`Listening at http://localhost:${port}`)
+/*
 http.createServer(function (req, res){
 	var q = url.parse(req.url, true);
 	var filename = "." + q.pathname;
@@ -103,7 +103,7 @@ http.createServer(function (req, res){
 		res.write(data);
 		return res.end();
 	});
-}).listen(8080);
+}).listen(8080);*/
 		
 		app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname+'/index.html'));
