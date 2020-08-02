@@ -75,7 +75,10 @@ app.post('/', function(request, response) {
 	});
 	//response.redirect('back');
   //end email
-  
+  //pause for 10 seconds to review output
+  setTimeout(function() {
+  }, 10000);
+	
   response.write(output);
   response.end('Thank you.')
 })
